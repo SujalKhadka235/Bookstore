@@ -1,16 +1,39 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Signup = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    return console.log(data);
+  const onSubmit = async (data) => {
+    const userInfo = {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
+    await axios
+      .post("http://localhost:4001/user/signup", userInfo)
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data.msg);
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        navigate(from, { replace: true });
+        window.location.reload();
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err);
+          alert("Error: " + err.response.data.msg);
+        }
+      });
   };
   return (
     <>
@@ -30,13 +53,13 @@ const Signup = () => {
                 <span>Name</span>
                 <br />
                 <input
-                  {...register("name", { required: true })}
+                  {...register("fullname", { required: true })}
                   className="w-80 px-3 py-1 border rounded-md ouline-none"
                   placeholder="Enter your name"
                   type="text"
                 />
                 <br />
-                {errors.name && (
+                {errors.fullname && (
                   <span className="text-sm text-red-500">
                     This field is required
                   </span>

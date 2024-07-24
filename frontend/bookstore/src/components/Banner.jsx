@@ -12,10 +12,12 @@ function Banner() {
               <span className="text-pink-500"> new everyday!!! </span>
             </h1>
             <p className="text-xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Similique blanditiis quaerat accusantium praesentium cupiditate
-              assumenda, officiis mollitia amet laborum, neque dolore aliquam
-              qui, nulla magni quae repellat nihil repellendus ab!
+              Join our community of lifelong learners! Here, you'll find a
+              wealth of resources to help you expand your knowledge and skills.
+              Whether you're looking to advance your career, explore a new
+              hobby, or simply stay curious, we have something for everyone.
+              Stay updated and never miss out on new and exciting courses
+              tailored just for you.
             </p>
             <label className="input input-bordered flex items-center gap-2">
               <svg
@@ -36,8 +38,13 @@ function Banner() {
             </button>
           </div>
         </div>
-        <div className="order-1 md:order-2 w-full md:w-1/2 md:mt-20 md:ml-10">
-          <img src={banner} className="w-92 h-92" alt=""></img>
+        <div className="order-1 md:order-2 w-full md:w-1/2 md:mt-20 md:ml-10 relative">
+          <img
+            src={banner}
+            className="w-full h-full object-cover"
+            alt="Learning Banner"
+          />
+          <div className="absolute inset-0 bg-white opacity-0 dark:bg-black dark:opacity-50"></div>
         </div>
       </div>
     </>
